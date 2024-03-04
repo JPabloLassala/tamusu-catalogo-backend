@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "rootDir": "./src",
+    /* JavaScript Support */
+    "allowJs": false,
+    // "sourceMap": true,
+    "target": "esnext",
+    "inlineSourceMap": true,
+    "outDir": "./dist",
+    "sourceRoot": "./src",
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "skipLibCheck": true
+  },
+  "include": [
+    "src/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}
