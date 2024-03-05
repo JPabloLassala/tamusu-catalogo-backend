@@ -1,8 +1,5 @@
 import { Response } from "express";
-
-interface MarcaAdapterInterface {
-  getMarcas: () => Promise<string[]>;
-}
+import { MarcaAdapterInterface } from "./MarcaSchema";
 
 export class MarcaHandler {
   constructor(private readonly marcaAdapter: MarcaAdapterInterface) {}

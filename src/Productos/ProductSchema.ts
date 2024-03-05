@@ -42,3 +42,7 @@ export interface Producto {
   modelo: string;
   lanzamiento: string | null;
 }
+
+export interface ProductoAdapterInterface {
+  getProductos: () => Promise<Producto[]>;
+}

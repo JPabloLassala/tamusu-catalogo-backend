@@ -27,3 +27,7 @@ export enum Marcas {
 export interface MarcaDTO {
   marca: string;
 }
+
+export interface MarcaAdapterInterface {
+  getMarcas: () => Promise<string[]>;
+}

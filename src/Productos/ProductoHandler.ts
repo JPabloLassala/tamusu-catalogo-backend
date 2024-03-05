@@ -1,9 +1,5 @@
 import { Response } from "express";
-import { Producto } from "./ProductSchema";
-
-interface ProductoAdapterInterface {
-  getProductos: () => Promise<Producto[]>;
-}
+import { Producto, ProductoAdapterInterface } from "./ProductSchema";
 
 export class ProductoHandler {
   constructor(private readonly productoAdapter: ProductoAdapterInterface) {}
