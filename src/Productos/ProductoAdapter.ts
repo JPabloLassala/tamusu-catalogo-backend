@@ -12,6 +12,9 @@ export class ProductoAdapter {
       .innerJoin("inventario", "inventario.codigo", "=", "articulos_es.codigo_capemi")
       .whereIn("Pesada", [null, ""]);
 
+    const isPesada = (pesada: Pesada): boolean => pesada === "PESADA";
+    const isLiviana = (liviana: Liviana | null): boolean => liviana === "LIVIANA";
+
     return dbResult.map((producto) => ({
       id: producto.codigo_capemi,
       descripcion: producto.descripcion,
@@ -19,8 +22,8 @@ export class ProductoAdapter {
       OEM: producto.OEM,
       codigo_completo: producto.codigo_completo,
       otros_mercados: producto.otros_mercados,
-      Pesada: producto.Pesada as Pesada,
-      Liviana: producto.Liviana as Liviana,
+      pesada: isPesada(producto.Pesada),
+      liviana: isLiviana(producto.Liviana),
       marca: producto.marca as unknown as Marcas,
       modelo: producto.modelo,
       lanzamiento: producto.lanzamiento,

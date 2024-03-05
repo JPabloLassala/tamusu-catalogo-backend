@@ -22,8 +22,8 @@ export interface ProductDTO {
   OEM: string;
   codigo_completo: string;
   otros_mercados: "";
-  Pesada: string | null;
-  Liviana: string | null;
+  Pesada: Pesada;
+  Liviana: Liviana;
   marca: string;
   modelo: string;
   lanzamiento: string | null;
@@ -36,8 +36,8 @@ export interface Producto {
   OEM: string;
   codigo_completo: string;
   otros_mercados: "";
-  Pesada: Pesada;
-  Liviana: Liviana;
+  pesada: boolean;
+  liviana: boolean;
   marca: Marcas;
   modelo: string;
   lanzamiento: string | null;
