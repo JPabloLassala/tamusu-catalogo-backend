@@ -24,6 +24,6 @@ export enum Marcas {
   "MERCEDES BENZ",
 }
 
-export interface MarcaObject {
+export interface MarcaDTO {
   marca: string;
 }

@@ -1,16 +1,12 @@
 import express, { Express } from "express";
 import knex from "knex";
 import cors from "cors";
-import { MarcaObject } from "./data/Marca";
+import { MarcaDTO } from "./data/Marca";
+import { KnexConfig } from "./config/knex";
 
 const app: Express = express();
 const port = 3000;
-const sqlite = knex({
-  client: "sqlite3",
-  connection: {
-    filename: "./Articulos.db",
-  },
-});
+const sqlite = knex(KnexConfig);
 
 app.use(cors());
 
@@ -26,7 +22,7 @@ app.get("/productos/", (_, res) => {
 
 app.get("/marcas", async (req, res) => {
   const marcas = await sqlite
-    .select<MarcaObject[]>("marca")
+    .select<MarcaDTO[]>("marca")
     .from("articulos_es")
     .innerJoin("inventario", "inventario.codigo", "=", "articulos_es.codigo_capemi")
     .groupBy("marca");
