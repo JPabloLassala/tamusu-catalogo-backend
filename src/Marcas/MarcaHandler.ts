@@ -1,5 +1,6 @@
 import { Response } from "express";
 import { MarcaAdapterInterface } from "./MarcaSchema";
+import { httpStatusCodes } from "../config/http";
 
 export class MarcaHandler {
   constructor(private readonly marcaAdapter: MarcaAdapterInterface) {}
@@ -15,6 +16,6 @@ export class MarcaHandler {
     });
     const marcasUnique = [...new Set(marcasSplit)];
 
-    return res.json(marcasUnique);
+    return res.status(httpStatusCodes.OK).json(marcasUnique);
   };
 }

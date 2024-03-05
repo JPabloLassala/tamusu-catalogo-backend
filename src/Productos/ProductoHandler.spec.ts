@@ -41,6 +41,7 @@ describe("ProductoHandler", () => {
 
     const res = {
       json: jest.fn(),
+      status: jest.fn().mockReturnThis(),
     } as unknown as Response;
 
     await productoHandler.getProductos(res);

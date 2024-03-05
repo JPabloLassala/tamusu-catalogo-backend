@@ -12,6 +12,7 @@ describe("MarcaHandler", () => {
     const marcaHandler = new MarcaHandler(marcaAdapterMock);
     const res = {
       json: jest.fn(),
+      status: jest.fn().mockReturnThis(),
     } as unknown as Response;
 
     await marcaHandler.getMarcas(res);

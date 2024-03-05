@@ -7,6 +7,7 @@ describe("ImageHandler", () => {
     const req = { params: { id: "1" } } as unknown as Request;
     const res = {
       sendFile: jest.fn(),
+      status: jest.fn().mockReturnThis(),
     } as unknown as Response;
     const spySendfile = jest.spyOn(res, "sendFile");
 
