@@ -1,6 +1,6 @@
 import { Express } from "express";
 import cors from "cors";
-import { createProductoRoutes } from "./Producto/ProductoRoutes";
+import { createProductoRoutes } from "./Productos/ProductoRoutes";
 import { Knex } from "knex";
 
 export function InitializeServer(app: Express, db: Knex) {

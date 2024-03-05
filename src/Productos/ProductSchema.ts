@@ -1,4 +1,4 @@
-import { Marcas } from "./Marca";
+import { Marcas } from "../Marcas/MarcaSchema";
 
 export enum Clasificacion {
   "ARMADO",
@@ -12,7 +12,7 @@ export enum Clasificacion {
   "SUSPENKITS",
 }
 
-export interface Product {
+export interface ProductDTO {
   codigo_capemi: string;
   descripcion: string;
   clasificacion: Clasificacion;

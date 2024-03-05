@@ -1,8 +1,8 @@
 import { Response } from "express";
 import knex from "knex";
 
-export function GetProductos(res: Response, db: knex.Knex) {
-  const test = db
+export async function getProductos(res: Response, db: knex.Knex) {
+  const test = await db
     .select("*")
     .from("articulos_es")
     .innerJoin("inventario", "inventario.codigo", "=", "articulos_es.codigo_capemi")
