@@ -130,5 +130,5 @@ dist
 .pnp.*
 images
 Articulos.db
-images
+./images
 .vscode
