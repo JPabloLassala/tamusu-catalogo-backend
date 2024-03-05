@@ -1,16 +1,16 @@
 import { Response } from "express";
-import knex from "knex";
+import { Producto } from "./ProductSchema";
+
+interface ProductoAdapterInterface {
+  getProductos: () => Promise<Producto[]>;
+}
 
 export class ProductoHandler {
-  constructor(private readonly db: knex.Knex) {}
+  constructor(private readonly productoAdapter: ProductoAdapterInterface) {}
 
   getProductos = async (res: Response) => {
-    const test = await this.db
-      .select("*")
-      .from("articulos_es")
-      .innerJoin("inventario", "inventario.codigo", "=", "articulos_es.codigo_capemi")
-      .whereIn("Pesada", [null, ""]);
+    const productos: Producto[] = await this.productoAdapter.getProductos();
 
-    return res.json(test);
+    return res.json(productos);
   };
 }

@@ -1,19 +1,16 @@
 import { Response } from "express";
-import { Knex } from "knex";
-import { MarcaDTO } from "./MarcaSchema";
+
+interface MarcaAdapterInterface {
+  getMarcas: () => Promise<string[]>;
+}
 
 export class MarcaHandler {
-  constructor(private readonly db: Knex) {}
+  constructor(private readonly marcaAdapter: MarcaAdapterInterface) {}
 
   getMarcas = async (res: Response) => {
-    const marcas = await this.db
-      .select<MarcaDTO[]>("marca")
-      .from("articulos_es")
-      .innerJoin("inventario", "inventario.codigo", "=", "articulos_es.codigo_capemi")
-      .groupBy("marca");
-
-    const marcasSplit: string[] = marcas.map((marca): string => {
-      const trimmedMarca: string = marca.marca.split(" / ").reduce((_: string, curr: string) => curr.trim());
+    const marcas = await this.marcaAdapter.getMarcas();
+    const marcasSplit: string[] = marcas.map((marca) => {
+      const trimmedMarca = marca.split(" / ").reduce((_, curr) => curr.trim());
       if (trimmedMarca === "VW") {
         return "VOLKSWAGEN";
       }
