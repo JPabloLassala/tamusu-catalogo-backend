@@ -1,10 +1,15 @@
 import { Express } from "express";
 import cors from "cors";
 import { createProductoRoutes } from "./Productos/ProductoRoutes";
-import { Knex } from "knex";
+import { createInstances } from "./Container";
+import { createMarcaRoutes } from "./Marcas/MarcaRoutes";
+import { createImageRoutes } from "./Images/ImageRoutes";
 
-export function InitializeServer(app: Express, db: Knex) {
+export function InitializeMiddlewares(app: Express): void {
   app.use(cors);
 
-  app.use("/", createProductoRoutes(db));
+  const { marcaHandler, productoHandler, imageHandler } = createInstances();
+  app.use("/", createProductoRoutes(productoHandler));
+  app.use("/", createMarcaRoutes(marcaHandler));
+  app.use("/", createImageRoutes(imageHandler));
 }
