@@ -1,11 +1,10 @@
 import express from "express";
-import { getProductos } from "./ProductoHandler";
-import { Knex } from "knex";
+import { ProductoHandler } from "./ProductoHandler";
 
-export function createProductoRoutes(db: Knex) {
+export function createProductoRoutes(productoHandler: ProductoHandler) {
   const router = express.Router();
 
-  router.get("/productos", (_, res) => getProductos(res, db));
+  router.get("/productos", (_, res) => productoHandler.getProductos(res));
 
   return router;
 }

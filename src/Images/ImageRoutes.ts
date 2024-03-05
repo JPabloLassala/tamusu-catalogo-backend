@@ -1,10 +1,10 @@
 import express from "express";
-import { getImage } from "./ImageHandler";
+import { ImageHandler } from "./ImageHandler";
 
-export function createImageRoutes() {
+export function createImageRoutes(imageHandler: ImageHandler) {
   const router = express.Router();
 
-  router.get("/productos", (req, res) => getImage(req, res));
+  router.get("/productos", (req, res) => imageHandler.getImage(req, res));
 
   return router;
 }

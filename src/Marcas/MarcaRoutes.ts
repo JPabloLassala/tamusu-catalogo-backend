@@ -1,11 +1,10 @@
 import express from "express";
-import { getMarcas } from "./MarcaHandler";
-import { Knex } from "knex";
+import { MarcaHandler } from "./MarcaHandler";
 
-export function createMarcaRoutes(db: Knex) {
+export function createMarcaRoutes(marcaHandler: MarcaHandler) {
   const router = express.Router();
 
-  router.get("/marcas", (_, res) => getMarcas(res, db));
+  router.get("/marcas", (_, res) => marcaHandler.getMarcas(res));
 
   return router;
 }
