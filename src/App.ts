@@ -6,7 +6,7 @@ import { createMarcaRoutes } from "./Marcas/MarcaRoutes";
 import { createImageRoutes } from "./Images/ImageRoutes";
 
 export function InitializeMiddlewares(app: Express): void {
-  app.use(cors);
+  app.use(cors());
 
   const { marcaHandler, productoHandler, imageHandler } = createInstances();
   app.use("/", createProductoRoutes(productoHandler));
