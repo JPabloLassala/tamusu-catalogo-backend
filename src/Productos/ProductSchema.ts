@@ -44,5 +44,5 @@ export interface Producto {
 }
 
 export interface ProductoAdapterInterface {
-  getProductos: () => Promise<Producto[]>;
+  getProductos: (n: number) => Promise<Producto[]>;
 }

@@ -5,12 +5,17 @@ import { Marcas } from "../Marcas/MarcaSchema";
 export class ProductoAdapter {
   constructor(private readonly db: Knex) {}
 
-  getProductos = async (): Promise<Producto[]> => {
+  getProductos = async (page: number): Promise<Producto[]> => {
+    const limit = 10;
+    const offset = page * limit;
+
     const dbResult: ProductDTO[] = await this.db
       .select("*")
       .from("articulos_es")
       .innerJoin("inventario", "inventario.codigo", "=", "articulos_es.codigo_capemi")
-      .whereIn("Pesada", [null, ""]);
+      .whereIn("Pesada", [null, ""])
+      .offset(offset)
+      .limit(limit);
 
     const isPesada = (pesada: Pesada): boolean => pesada === "PESADA";
     const isLiviana = (liviana: Liviana | null): boolean => liviana === "LIVIANA";

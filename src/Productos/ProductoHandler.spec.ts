@@ -1,4 +1,4 @@
-import { Response } from "express";
+import { Request, Response } from "express";
 import { Marcas } from "../Marcas/MarcaSchema";
 import { Clasificacion, Producto, ProductoAdapterInterface } from "./ProductSchema";
 import { ProductoHandler } from "./ProductoHandler";
@@ -43,8 +43,11 @@ describe("ProductoHandler", () => {
       json: jest.fn(),
       status: jest.fn().mockReturnThis(),
     } as unknown as Response;
+    const req = {
+      params: { page: "1" },
+    } as unknown as Request;
 
-    await productoHandler.getProductos(res);
+    await productoHandler.getProductos(req, res);
 
     expect(productoAdapterMock.getProductos).toHaveBeenCalledTimes(1);
     expect(res.json).toHaveBeenCalledWith(productos);
