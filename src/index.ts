@@ -6,4 +6,6 @@ const app: Express = express();
 
 InitializeMiddlewares(app);
 
-app.listen(envConfig.port, () => console.log(`Example app listening on port ${envConfig.port}`));
+app.listen(envConfig.port, () =>
+  console.log(`Example app listening on port ${envConfig.port}`),
+);

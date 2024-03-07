@@ -4,12 +4,12 @@ import { createProductoRoutes } from "./Productos/ProductoRoutes";
 import { createInstances } from "./Container";
 import { createMarcaRoutes } from "./Marcas/MarcaRoutes";
 import { createImageRoutes } from "./Images/ImageRoutes";
-import morgan from "morgan";
 import { globalExceptionLayer } from "./Error";
+import { morganMiddleware } from "./config/morgan";
 
 export function InitializeMiddlewares(app: Express): void {
   app.use(cors());
-  app.use(morgan("combined"));
+  app.use(morganMiddleware);
 
   const { marcaHandler, productoHandler, imageHandler } = createInstances();
   app.use("/", createProductoRoutes(productoHandler));
