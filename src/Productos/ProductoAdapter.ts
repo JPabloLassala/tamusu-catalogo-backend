@@ -1,5 +1,11 @@
 import { Knex } from "knex";
-import { Clasificacion, Liviana, Pesada, ProductDTO, Producto } from "./ProductSchema";
+import {
+  Clasificacion,
+  Liviana,
+  Pesada,
+  ProductDTO,
+  Producto,
+} from "./ProductSchema";
 import { Marcas } from "../Marcas/MarcaSchema";
 
 export class ProductoAdapter {
@@ -12,13 +18,19 @@ export class ProductoAdapter {
     const dbResult: ProductDTO[] = await this.db
       .select("*")
       .from("articulos_es")
-      .innerJoin("inventario", "inventario.codigo", "=", "articulos_es.codigo_capemi")
+      .innerJoin(
+        "inventario",
+        "inventario.codigo",
+        "=",
+        "articulos_es.codigo_capemi",
+      )
       .whereIn("Pesada", [null, ""])
       .offset(offset)
       .limit(limit);
 
     const isPesada = (pesada: Pesada): boolean => pesada === "PESADA";
-    const isLiviana = (liviana: Liviana | null): boolean => liviana === "LIVIANA";
+    const isLiviana = (liviana: Liviana | null): boolean =>
+      liviana === "LIVIANA";
 
     return dbResult.map((producto) => ({
       id: producto.codigo_capemi,

@@ -8,7 +8,12 @@ export class MarcaAdapter {
     const result = await this.db
       .select<MarcaDTO[]>("marca")
       .from("articulos_es")
-      .innerJoin("inventario", "inventario.codigo", "=", "articulos_es.codigo_capemi")
+      .innerJoin(
+        "inventario",
+        "inventario.codigo",
+        "=",
+        "articulos_es.codigo_capemi",
+      )
       .groupBy("marca");
 
     return result.map((marca): string => marca.marca);

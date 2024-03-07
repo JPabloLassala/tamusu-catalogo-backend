@@ -13,6 +13,8 @@ describe("ImageHandler", () => {
 
     imageHandler.getImage(req, res);
 
-    expect(spySendfile).toHaveBeenCalledWith(`./images/1.png`, { root: process.cwd() });
+    expect(spySendfile).toHaveBeenCalledWith(`./images/1.png`, {
+      root: process.cwd(),
+    });
   });
 });

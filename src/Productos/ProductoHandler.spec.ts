@@ -1,6 +1,10 @@
 import { Request, Response } from "express";
 import { Marcas } from "../Marcas/MarcaSchema";
-import { Clasificacion, Producto, ProductoAdapterInterface } from "./ProductSchema";
+import {
+  Clasificacion,
+  Producto,
+  ProductoAdapterInterface,
+} from "./ProductSchema";
 import { ProductoHandler } from "./ProductoHandler";
 
 describe("ProductoHandler", () => {
