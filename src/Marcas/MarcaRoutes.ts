@@ -4,7 +4,7 @@ import { MarcaHandler } from "./MarcaHandler";
 export function createMarcaRoutes(marcaHandler: MarcaHandler) {
   const router = express.Router();
 
-  router.get("/marcas", (_, res) => marcaHandler.getMarcas(res));
+  router.get("/marcas", marcaHandler.getMarcas.bind(marcaHandler));
 
   return router;
 }
