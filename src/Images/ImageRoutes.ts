@@ -4,7 +4,7 @@ import { ImageHandler } from "./ImageHandler";
 export function createImageRoutes(imageHandler: ImageHandler) {
   const router = express.Router();
 
-  router.get("/productos", imageHandler.getImage.bind(imageHandler));
+  router.get("/images/:id", imageHandler.getImage.bind(imageHandler));
 
   return router;
 }
