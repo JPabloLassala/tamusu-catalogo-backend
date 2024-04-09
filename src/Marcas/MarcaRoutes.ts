@@ -1,11 +1,11 @@
 import express from "express";
-import { MarcaHandler } from "./MarcaHandler";
+import { MarcaController } from "./MarcaController";
 
-export function createMarcaRoutes(marcaHandler: MarcaHandler) {
+export function createMarcaRoutes(marcaController: MarcaController) {
   const router = express.Router();
 
   router.get("/marcas", (req, res) =>
-    marcaHandler.getMarcas.bind(marcaHandler)(res),
+    marcaController.getMarcas.bind(marcaController)(res),
   );
 
   return router;

@@ -28,6 +28,6 @@ export interface MarcaDTO {
   marca: string;
 }
 
-export interface MarcaAdapterInterface {
+export interface MarcaRepositoryInterface {
   getMarcas: () => Promise<string[]>;
 }

@@ -1,0 +1,130 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Catálogo Tamusu",
+    "description": "REST API para el catálogo de productos"
+  },
+  "servers": [],
+  "paths": {
+    "/productos": {
+      "get": {
+        "parameters": [
+          {
+            "name": "page",
+            "in": "path",
+            "description": "Page",
+            "required": true,
+            "type": "number"
+          }
+        ],
+        "summary": "Get a paginated list of products",
+        "responses": {
+          "200": {
+            "description": "A list of products",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Producto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/marcas": {
+      "get": {
+        "summary": "Get a list of brands",
+        "responses": {
+          "200": {
+            "description": "A list of brands",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/images/{id}": {
+      "get": {
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Product id",
+            "required": true,
+            "type": "string",
+            "example": "21"
+          }
+        ],
+        "summary": "Get the image of a product",
+        "responses": {
+          "200": {
+            "description": "The image",
+            "content": {
+              "image/*": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Producto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "descripcion": {
+            "type": "string"
+          },
+          "clasificacion": {
+            "type": "Clasificacion"
+          },
+          "OEM": {
+            "type": "string"
+          },
+          "codigo_completo": {
+            "type": "string"
+          },
+          "otros_mercados": {
+            "type": "string"
+          },
+          "pesada": {
+            "type": "boolean"
+          },
+          "liviana": {
+            "type": "boolean"
+          },
+          "marca": {
+            "type": "string"
+          },
+          "modelo": {
+            "type": "string"
+          },
+          "lanzamiento": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

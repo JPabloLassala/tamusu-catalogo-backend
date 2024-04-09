@@ -1,20 +1,20 @@
 import knex from "knex";
 import { KnexConfig } from "./config/knex";
-import { MarcaHandler } from "./Marcas/MarcaHandler";
-import { ProductoHandler } from "./Productos/ProductoHandler";
-import { ImageHandler } from "./Images/ImageHandler";
-import { ProductoAdapter } from "./Productos/ProductoAdapter";
-import { MarcaAdapter } from "./Marcas/MarcaAdapter";
+import { MarcaController } from "./Marcas/MarcaController";
+import { ProductoController } from "./Productos/ProductoController";
+import { ImageController } from "./Images/ImageController";
+import { ProductoRepository } from "./Productos/ProductoRepository";
+import { MarcaRepository } from "./Marcas/MarcaRepository";
 
 export function createInstances() {
   const sqlite = knex(KnexConfig);
 
-  const productoAdapter = new ProductoAdapter(sqlite);
-  const marcaAdapter = new MarcaAdapter(sqlite);
+  const productoRepository = new ProductoRepository(sqlite);
+  const marcaRepository = new MarcaRepository(sqlite);
 
-  const marcaHandler = new MarcaHandler(marcaAdapter);
-  const productoHandler = new ProductoHandler(productoAdapter);
-  const imageHandler = new ImageHandler();
+  const marcaController = new MarcaController(marcaRepository);
+  const productoController = new ProductoController(productoRepository);
+  const imageController = new ImageController();
 
-  return { marcaHandler, productoHandler, imageHandler };
+  return { marcaController, productoController, imageController };
 }

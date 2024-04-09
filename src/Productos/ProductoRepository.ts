@@ -8,13 +8,10 @@ import {
 } from "./ProductSchema";
 import { Marcas } from "../Marcas/MarcaSchema";
 
-export class ProductoAdapter {
+export class ProductoRepository {
   constructor(private readonly db: Knex) {}
 
-  getProductos = async (page: number): Promise<Producto[]> => {
-    const limit = 10;
-    const offset = page * limit;
-
+  getProductos = async (): Promise<Producto[]> => {
     const dbResult: ProductDTO[] = await this.db
       .select("*")
       .from("articulos_es")
@@ -24,10 +21,7 @@ export class ProductoAdapter {
         "=",
         "articulos_es.codigo_capemi",
       )
-      .whereIn("Pesada", [null, ""])
-      .offset(offset)
-      .limit(limit);
-
+      .whereIn("Pesada", [null, ""]);
     const isPesada = (pesada: Pesada): boolean => pesada === "PESADA";
     const isLiviana = (liviana: Liviana | null): boolean =>
       liviana === "LIVIANA";

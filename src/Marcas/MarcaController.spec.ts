@@ -1,23 +1,23 @@
 import { Response } from "express";
-import { MarcaHandler } from "./MarcaHandler";
-import { MarcaAdapterInterface } from "./MarcaSchema";
+import { MarcaController } from "./MarcaController";
+import { MarcaRepositoryInterface } from "./MarcaSchema";
 
-describe("MarcaHandler", () => {
+describe("MarcaController", () => {
   it("should return a list of brands", async () => {
     const startingMarcas = ["marca1", "marca2", "VW"];
     const resultMarcas = ["marca1", "marca2", "VOLKSWAGEN"];
-    const marcaAdapterMock: MarcaAdapterInterface = {
+    const marcaRepositoryMock: MarcaRepositoryInterface = {
       getMarcas: jest.fn().mockResolvedValue(startingMarcas),
     };
-    const marcaHandler = new MarcaHandler(marcaAdapterMock);
+    const marcaController = new MarcaController(marcaRepositoryMock);
     const res = {
       json: jest.fn(),
       status: jest.fn().mockReturnThis(),
     } as unknown as Response;
 
-    await marcaHandler.getMarcas(res);
+    await marcaController.getMarcas(res);
 
-    expect(marcaAdapterMock.getMarcas).toHaveBeenCalledTimes(1);
+    expect(marcaRepositoryMock.getMarcas).toHaveBeenCalledTimes(1);
     expect(res.json).toHaveBeenCalledWith(resultMarcas);
   });
 });

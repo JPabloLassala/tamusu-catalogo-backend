@@ -1,11 +1,10 @@
 import { Request, Response } from "express";
 import { httpStatusCodes } from "../config/http";
 
-export class ImageHandler {
+export class ImageController {
   public getImage(req: Request, res: Response) {
     const filePath = `./images/${req.params.id}.png`;
-    return res
-      .status(httpStatusCodes.OK)
-      .sendFile(filePath, { root: process.cwd() });
+
+    res.status(httpStatusCodes.OK).sendFile(filePath, { root: process.cwd() });
   }
 }

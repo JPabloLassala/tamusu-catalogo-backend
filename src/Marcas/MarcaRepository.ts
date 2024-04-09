@@ -1,7 +1,7 @@
 import { Knex } from "knex";
-import { MarcaDTO } from "./MarcaSchema";
+import { MarcaDTO, MarcaRepositoryInterface } from "./MarcaSchema";
 
-export class MarcaAdapter {
+export class MarcaRepository implements MarcaRepositoryInterface {
   constructor(private readonly db: Knex) {}
 
   getMarcas = async (): Promise<string[]> => {

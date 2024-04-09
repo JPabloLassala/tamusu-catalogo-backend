@@ -5,9 +5,9 @@ import {
   Producto,
   ProductoAdapterInterface,
 } from "./ProductSchema";
-import { ProductoHandler } from "./ProductoHandler";
+import { ProductoController } from "./ProductoController";
 
-describe("ProductoHandler", () => {
+describe("ProductoController", () => {
   it("should return a list of products", async () => {
     const productos: Producto[] = [
       {
@@ -38,10 +38,10 @@ describe("ProductoHandler", () => {
       },
     ];
 
-    const productoAdapterMock: ProductoAdapterInterface = {
+    const productoRepositoryMock: ProductoAdapterInterface = {
       getProductos: jest.fn().mockResolvedValue(productos),
     };
-    const productoHandler = new ProductoHandler(productoAdapterMock);
+    const productoHandler = new ProductoController(productoRepositoryMock);
 
     const res = {
       json: jest.fn(),
@@ -53,7 +53,7 @@ describe("ProductoHandler", () => {
 
     await productoHandler.getProductos(req, res);
 
-    expect(productoAdapterMock.getProductos).toHaveBeenCalledTimes(1);
+    expect(productoRepositoryMock.getProductos).toHaveBeenCalledTimes(1);
     expect(res.json).toHaveBeenCalledWith(productos);
   });
 });

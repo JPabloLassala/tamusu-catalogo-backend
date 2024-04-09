@@ -1,12 +1,12 @@
 import express from "express";
-import { ProductoHandler } from "./ProductoHandler";
+import { ProductoController } from "./ProductoController";
 
-export function createProductoRoutes(productoHandler: ProductoHandler) {
+export function createProductoRoutes(productoController: ProductoController) {
   const router = express.Router();
 
   router.get(
-    "/productos/:page?",
-    productoHandler.getProductos.bind(productoHandler),
+    "/productos",
+    productoController.getProductos.bind(productoController),
   );
 
   return router;

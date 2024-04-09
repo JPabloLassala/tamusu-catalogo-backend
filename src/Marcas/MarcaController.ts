@@ -1,12 +1,12 @@
 import { Response } from "express";
-import { MarcaAdapterInterface } from "./MarcaSchema";
+import { MarcaRepositoryInterface } from "./MarcaSchema";
 import { httpStatusCodes } from "../config/http";
 
-export class MarcaHandler {
-  constructor(private readonly marcaAdapter: MarcaAdapterInterface) {}
+export class MarcaController {
+  constructor(private readonly marcaRepository: MarcaRepositoryInterface) {}
 
   public async getMarcas(res: Response) {
-    const marcas = await this.marcaAdapter.getMarcas();
+    const marcas = await this.marcaRepository.getMarcas();
     const marcasSplit: string[] = marcas.map((marca) => {
       const trimmedMarca = marca.split(" / ").reduce((_, curr) => curr.trim());
       if (trimmedMarca === "VW") {

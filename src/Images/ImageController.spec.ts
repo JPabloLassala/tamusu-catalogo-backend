@@ -1,9 +1,9 @@
 import { Request, Response } from "express";
-import { ImageHandler } from "./ImageHandler";
+import { ImageController } from "./ImageController";
 
-describe("ImageHandler", () => {
+describe("ImageController", () => {
   it("should return a file", () => {
-    const imageHandler = new ImageHandler();
+    const imageController = new ImageController();
     const req = { params: { id: "1" } } as unknown as Request;
     const res = {
       sendFile: jest.fn(),
@@ -11,7 +11,7 @@ describe("ImageHandler", () => {
     } as unknown as Response;
     const spySendfile = jest.spyOn(res, "sendFile");
 
-    imageHandler.getImage(req, res);
+    imageController.getImage(req, res);
 
     expect(spySendfile).toHaveBeenCalledWith(`./images/1.png`, {
       root: process.cwd(),
